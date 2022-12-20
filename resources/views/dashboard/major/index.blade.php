@@ -1,7 +1,4 @@
 @extends('layouts.master')
-@section('title')
-تعديل طبيب
-@stop
 @section('css')
 <!-- Internal Data table css -->
 <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -16,7 +13,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">doctors</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Data Tables</span>
+							<h4 class="content-title mb-0 my-auto"></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"></span>
 						</div>
 					</div>
 					<div class="d-flex my-xl-auto right-content">
@@ -48,71 +45,68 @@
 				<!-- breadcrumb -->
 @endsection
 @section('content')
-<form action="{{route('doctor.update',$doctor->id)}}" method="post" enctype="multipart/form-data">
-    {{csrf_field()}}
-    <div class="modal-body">
-        <div class="form-group">
-            <label for="name">اسم الدكتور</label>
-            <input type="text" class="form-control col-sm-6" id="name" value="{{$doctor->name}}" name="name" >
-            @error('name')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">التخصص</label>
-        <select name="major_id" id="major_id" class="form-control" required>
-            <option value="" selected disabled> --حدد التخصص--</option>
-            @foreach ($majors as $item)
-                <option value="{{ $item->id }}">{{ $item->name }}</option>
-            @endforeach
-            @error('major_id')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </select>
-        <div class="form-group">
-            <label for="phone">التلفون </label>
-            <input type="text" class="form-control col-sm-6" id="phone" value="{{$doctor->phone}}" name="phone" >
-            @error('phone')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-        <div class="form-group">
-          <label for="employee_desc">الوصف الوظيفي</label>
-          <textarea class="form-control" name="employee_desc" id="employee_desc" rows="3">{{$doctor->employee_desc}}</textarea>
-          @error('employee_desc')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
-        <div class="form-group">
-            <label for="doctor_desc">وصف الدكتور</label>
-            <textarea class="form-control" name="doctor_desc" id="doctor_desc" rows="3">{{$doctor->doctor_desc}}</textarea>
-            @error('doctor_desc')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
+				<!-- row opened -->
+				<div class="row row-sm">
+					<div class="col-xl-12">
+						<div class="card">
+							<div class="card-header pb-0">
+								<div class="d-flex justify-content-between">
+									<h4 class="card-title mg-b-0">التخصصات للطبيب </h4>
+									<i class="mdi mdi-dots-horizontal text-gray"></i>
+								</div>
+								<a name="add" id="" class="btn btn-success" href="{{route('majors.create')}}" role="button">اضافة</a>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table text-md-nowrap" id="example1">
+										<thead>
+											<tr>
+												<th class="wd-15p border-bottom-0">رقم الملف</th>
+												<th class="wd-15p border-bottom-0">اسم التخصص</th>
+                                                <th class="wd-25p border-bottom-0">تعديل</th>
+                                                <th class="wd-25p border-bottom-0">حذف</th>
 
-        <div class="form-group">
-            <label for="image"> الصورة </label>
-            <input type="file" class="form-control col-sm-6" id="image" value="{{$doctor->image}}" name="image" >
-            @error('image')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-        <div class="form-group">
-            <label for="price">السعر  </label>
-            <input type="text" class="form-control col-sm-6" id="price" value="{{$doctor->price}}" name="price" >
-            @error('price')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
+											</tr>
+										</thead>
+										<tbody>
+                                            @foreach ($majors as $item)
+                                            <tr>
+												<td>{{$item->id}}</td>
+												<td>{{$item->name}}</td>
 
+                                                <td><a  class="btn btn-success" href="{{route('majors.edit',$item->id)}}" role="button">تعديل</a></td>
+                                                <td>
+                                                    <form action="{{route('majors.destroy',$item->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger">حذف</button>
+                                                    </form>
+                                                </td>
 
+											</tr>
 
+                                            @endforeach
 
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-success">تاكيد</button>
-    </div>
-</form>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/div-->
+
+					<!--div-->
+
+					<!--/div-->
+
+					<!--div-->
+
+					<!--/div-->
+
+					<!--div-->
+
+				</div>
+				<!-- /row -->
 			</div>
 			<!-- Container closed -->
 		</div>

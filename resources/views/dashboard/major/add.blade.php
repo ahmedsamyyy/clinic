@@ -1,7 +1,4 @@
 @extends('layouts.master')
-@section('title')
-تعديل طبيب
-@stop
 @section('css')
 <!-- Internal Data table css -->
 <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -16,7 +13,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">doctors</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Data Tables</span>
+							<h4 class="content-title mb-0 my-auto">اضافة تخصص</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"></span>
 						</div>
 					</div>
 					<div class="d-flex my-xl-auto right-content">
@@ -48,63 +45,16 @@
 				<!-- breadcrumb -->
 @endsection
 @section('content')
-<form action="{{route('doctor.update',$doctor->id)}}" method="post" enctype="multipart/form-data">
+<form action="{{route('majors.store')}}" method="post">
     {{csrf_field()}}
     <div class="modal-body">
         <div class="form-group">
-            <label for="name">اسم الدكتور</label>
-            <input type="text" class="form-control col-sm-6" id="name" value="{{$doctor->name}}" name="name" >
+            <label for="name">اسم التخصص</label>
+            <input type="text" class="form-control col-sm-6" id="name" name="name" >
             @error('name')
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">التخصص</label>
-        <select name="major_id" id="major_id" class="form-control" required>
-            <option value="" selected disabled> --حدد التخصص--</option>
-            @foreach ($majors as $item)
-                <option value="{{ $item->id }}">{{ $item->name }}</option>
-            @endforeach
-            @error('major_id')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </select>
-        <div class="form-group">
-            <label for="phone">التلفون </label>
-            <input type="text" class="form-control col-sm-6" id="phone" value="{{$doctor->phone}}" name="phone" >
-            @error('phone')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-        <div class="form-group">
-          <label for="employee_desc">الوصف الوظيفي</label>
-          <textarea class="form-control" name="employee_desc" id="employee_desc" rows="3">{{$doctor->employee_desc}}</textarea>
-          @error('employee_desc')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
-        <div class="form-group">
-            <label for="doctor_desc">وصف الدكتور</label>
-            <textarea class="form-control" name="doctor_desc" id="doctor_desc" rows="3">{{$doctor->doctor_desc}}</textarea>
-            @error('doctor_desc')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-          </div>
-
-        <div class="form-group">
-            <label for="image"> الصورة </label>
-            <input type="file" class="form-control col-sm-6" id="image" value="{{$doctor->image}}" name="image" >
-            @error('image')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-        <div class="form-group">
-            <label for="price">السعر  </label>
-            <input type="text" class="form-control col-sm-6" id="price" value="{{$doctor->price}}" name="price" >
-            @error('price')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-
 
 
 

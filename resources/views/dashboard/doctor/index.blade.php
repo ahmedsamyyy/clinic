@@ -85,7 +85,7 @@
                                             <tr>
 												<td>{{$item->id}}</td>
 												<td>{{$item->name}}</td>
-												<td>{{$item->major}}</td>
+												<td>{{$item->majors->name??"-"}}</td>
 												<td>{{$item->phone}}</td>
 												<td>{{$item->employee_desc}}</td>
                                                 <td>{{$item->doctor_desc}}</td>

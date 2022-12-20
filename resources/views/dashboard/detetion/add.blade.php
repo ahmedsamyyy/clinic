@@ -49,26 +49,34 @@
     {{csrf_field()}}
     <div class="modal-body">
         <div class="form-group">
-            <label for="name">الاسم</label>
-            <input type="text" class="form-control col-sm-6" id="name" name="name" >
-            @error('name')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
-        <div class="form-group">
             <label for="discount">الخصم </label>
             <input type="discount" class="form-control col-sm-6" id="discount" name="discount" >
             @error('discount')
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-        <select name="section_id" id="section_id" class="form-control" required>
-            <option value="" selected disabled> --حدد القسم--</option>
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">اختر المريض</label>
+        <select name="patient_id" id="patient_id" class="form-control" required>
+            <option value="" selected disabled> --حدد المريض--</option>
             @foreach ($patient as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>
             @endforeach
         </select>
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">اختر الدكتور</label>
+        <select name="doctor_id" id="doctor_id" class="form-control" required>
+            <option value="" selected disabled> --حدد الدكتور--</option>
+            @foreach ($doctor as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+            @endforeach
+        </select>
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">اختر الفرع</label>
+        <select name="branch_id" id="branch_id" class="form-control" required>
+            <option value="" selected disabled> --حدد الفرع--</option>
+            @foreach ($branch as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+            @endforeach
+        </select>
+
         <div class="form-group">
             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الدفع</label>
                                         <select name="payment" id="payment" class="form-control" >
@@ -96,14 +104,27 @@
             @enderror
         </div>
         <div class="form-group">
-            <label for="rumores">الاشاعات</label>
-            <input type="text" class="form-control col-sm-6" id="rumores" name="rumores" >
-            @error('rumores')
+            <label for="rays">الاشاعات</label>
+            <input type="text" class="form-control col-sm-6" id="rays" name="rays" >
+            @error('rays')
             <span class="text-danger">{{$message}}</span>
             @enderror
-
-
         </div>
+        <div class="form-group">
+            <label for="detection">الكشف</label>
+            <input type="text" class="form-control col-sm-6" id="detection" name="detection" >
+            @error('detection')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="consultation">الاستشارة</label>
+            <input type="text" class="form-control col-sm-6" id="consultation" name="consultation" >
+            @error('consultation')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
 
 
 

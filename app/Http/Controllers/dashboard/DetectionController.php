@@ -17,11 +17,9 @@ class DetectionController extends Controller
 
     public function index()
     {
-        $patient=Patient::get();
+
         $detetion=Detection::paginate(20);
-        $doctor=Doctor::get();
-        $branch=Branches::get();
-        return view('dashboard.detetion.index',compact('detetion','patient','doctor','branch'));
+        return view('dashboard.detetion.index',compact('detetion'));
     }
 
     /**
@@ -31,7 +29,10 @@ class DetectionController extends Controller
      */
     public function create()
     {
-        return view('dashboard.detetion.add');
+        $doctor=Doctor::get();
+        $branch=Branches::get();
+        $patient=Patient::get();
+        return view('dashboard.detetion.add',compact('doctor','branch','patient'));
     }
 
     /**
@@ -40,7 +41,7 @@ class DetectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DetectionRequest $request)
+    public function store(Request $request)
     {
         $detetion=Detection::create([
             'name'=>$request->name,
@@ -48,10 +49,12 @@ class DetectionController extends Controller
             'payment'=>$request->payment,
             'roshet'=>$request->roshet,
             'analysis'=>$request->analysis,
-            'rumores'=>$request->rumores,
+            'rays'=>$request->rays,
             'patient_id'=>$request->patient_id,
             'doctor_id'=>$request->doctor_id,
             'branch_id'=>$request->branch_id,
+            'detection'=>$request->detection,
+            'consultation'=>$request->consultation,
 
         ]);
         return redirect()->route('detetion.index');
@@ -89,7 +92,10 @@ class DetectionController extends Controller
             'payment'=>$request->payment,
             'roshet'=>$request->roshet,
             'analysis'=>$request->analysis,
-            'rumores'=>$request->rumores,
+            'rays'=>$request->rays,
+            'detection'=>$request->detection,
+            'consultation'=>$request->consultation,
+
 
         ]);
         return redirect()->route('detetion.index');

@@ -8,6 +8,7 @@ use App\Http\Requests\DoctorRequest;
 use App\Http\Requests\patientRequest;
 use App\Models\Date;
 use App\Models\Doctor;
+use App\Models\Major;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors=Doctor::paginate(20);
+
+       $doctors=Doctor::paginate(20);
         return view('dashboard.doctor.index',compact('doctors'));
     }
 
@@ -32,7 +34,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('dashboard.doctor.add');
+        $majors=Major::get();
+        return view('dashboard.doctor.add',compact('majors'));
     }
 
     /**
@@ -53,7 +56,7 @@ class DoctorController extends Controller
 
             $doctor=Doctor::create([
                 'name'=>$request->name,
-                'major'=>$request->major,
+                'major_id'=>$request->major_id,
                 'phone'=>$request->phone,
                 'employee_desc'=>$request->employee_desc,
                 'doctor_desc'=>$request->doctor_desc,
@@ -81,7 +84,9 @@ public function show(){
      */
     public function edit(Doctor $doctor)
     {
-        return view('dashboard.doctor.edit',compact('doctor'));
+        $majors=Major::get();
+
+        return view('dashboard.doctor.edit',compact('doctor','majors'));
     }
 
     /**
@@ -94,13 +99,14 @@ public function show(){
     public function update(DoctorRequest $request, Doctor $doctor)
     {
 
+
             $image = $request->file('image');
             $file_name = Time().'-'.$image->getClientOriginalName();
             $file_path = public_path().'/images';
             $image->move($file_path,$file_name);
         $doctor->update([
             'name'=>$request->name,
-            'major'=>$request->major,
+            'major_id'=>$request->major_id,
             'phone'=>$request->phone,
             'employee_desc'=>$request->employee_desc,
             'doctor_desc'=>$request->doctor_desc,
@@ -113,14 +119,14 @@ public function show(){
 
     public function destroy(Doctor $doctor)
     {
-        $admin=auth()->user();
-        if($admin->can('softdelete')){
-            $doctor->delete();
-        return redirect()->route('doctor.index');
-        }
-        return redirect()->back();
-        // $doctor->delete();
+        // $admin=auth()->user();
+        // if($admin->can('softdelete')){
+        //     $doctor->delete();
         // return redirect()->route('doctor.index');
+        // }
+        // return redirect()->back();
+        $doctor->delete();
+        return redirect()->route('doctor.index');
 
     }
     public function trash()

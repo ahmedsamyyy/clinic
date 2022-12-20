@@ -8,6 +8,7 @@ use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\DetectionController;
 use App\Http\Controllers\dashboard\DoctorController;
 use App\Http\Controllers\dashboard\HomeController;
+use App\Http\Controllers\dashboard\MajorController;
 use App\Http\Controllers\dashboard\PatientController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -103,6 +104,15 @@ Route::get('branches',[BranchesController::class,'index'])->name('branches.index
     Route::get('branches/trash',[BranchesController::class,'trash'])->name('branches.trash');
     Route::get('branches/restore/{id}',[BranchesController::class,'restore'])->name('branches.restore');
     Route::get('branches/hard-delete/{id}',[BranchesController::class,'hard_delete'])->name('branches.hard.delete');
+
+    //////////////////////////majors///////////////////////////////
+    Route::get('major',[MajorController::class,'index'])->name('majors.index');
+    Route::get('major/create',[MajorController::class,'create'])->name('majors.create');
+    Route::post('major',[MajorController::class,'store'])->name('majors.store');
+    Route::get('major/{major}/edit',[MajorController::class,'edit'])->name('majors.edit');
+    Route::post('majors/{major}',[MajorController::class,'update'])->name('majors.update');
+    Route::delete('major/{major}',[MajorController::class,'destroy'])->name('majors.destroy');
+    //////////////////////////endMajors///////////////////////////////
 
 
 

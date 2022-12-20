@@ -24,7 +24,6 @@ class DetectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
             'discount'=>'required',
             'payment'=>'required',
             'roshet'=>'required',

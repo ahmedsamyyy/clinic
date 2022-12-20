@@ -58,13 +58,15 @@
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
-        <div class="form-group">
-            <label for="major">التخصص </label>
-            <input type="text" class="form-control col-sm-6" id="major" name="major" >
-            @error('major')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
-        </div>
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
+        <select name="major_id" id="major_id" class="form-control" required>
+            <option value="" selected disabled> --حدد التخصص--</option>
+            @foreach ($majors as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+            @endforeach
+        </select>
+
+
         <div class="form-group">
             <label for="phone">التلفون </label>
             <input type="text" class="form-control col-sm-6" id="phone" name="phone" >
@@ -91,7 +93,7 @@
 
             <label for="image"> الصورة </label>
             <input type="file" class="form-control col-sm-6" id="image" name="image">
-            
+
             @error('image')
             <span class="text-danger">{{$message}}</span>
             @enderror

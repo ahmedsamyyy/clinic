@@ -63,12 +63,15 @@
 									<table class="table text-md-nowrap" id="example1">
 										<thead>
 											<tr>
-												<th class="wd-15p border-bottom-0">الاسم للكشف </th>
+
 												<th class="wd-15p border-bottom-0">الخصم</th>
 												<th class="wd-20p border-bottom-0">طريقة الدفع</th>
 												<th class="wd-15p border-bottom-0">الروشتات</th>
 												<th class="wd-25p border-bottom-0"> التحاليل</th>
                                                 <th class="wd-25p border-bottom-0">الاشاعات</th>
+                                                <th class="wd-25p border-bottom-0">الدكتور</th>
+                                                <th class="wd-25p border-bottom-0">المريض</th>
+                                                <th class="wd-25p border-bottom-0">الفروع</th>
                                                 <th class="wd-25p border-bottom-0">تعديل</th>
                                                 <th class="wd-25p border-bottom-0">حذف</th>
 
@@ -77,12 +80,14 @@
 										<tbody>
                                             @foreach ($detetion as $item)
                                             <tr>
-												<td>{{$item->name}}</td>
 												<td>{{$item->discount}}</td>
 												<td>{{$item->payment}}</td>
 												<td>{{$item->roshet}}</td>
 												<td>{{$item->analysis}}</td>
-                                                <td>{{$item->rumores}}</td>
+                                                <td>{{$item->rays}}</td>
+                                                <td>{{$item->doctor->name}}</td>
+                                                <td>{{$item->patient->name}}</td>
+                                                <td>{{$item->branch->name}}</td>
                                                 <td><a  class="btn btn-success" href="{{route('detetion.edit',$item->id)}}" role="button">تعديل</a></td>
                                                 <td>
                                                     <form action="{{route('detetion.destroy',$item->id)}}" method="POST">

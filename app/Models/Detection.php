@@ -10,5 +10,19 @@ class Detection extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable=['name','discount','payment','roshet','analysis','rumores'];
+    protected $fillable=['discount','payment','patient_id','doctor_id','branch_id','roshet','analysis','rays','detection','consultation'];
+
+
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class, 'doctor_id', 'id');
+    }
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class, 'patient_id', 'id');
+    }
+    public function branch()
+    {
+        return $this->belongsTo(Branches::class, 'branch_id', 'id');
+    }
 }

@@ -25,7 +25,7 @@ class DoctorRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'major'=>'required',
+            'major_id'=>'required',
             'phone'=>'required',
             'employee_desc'=>'required',
             'doctor_desc'=>'required',
